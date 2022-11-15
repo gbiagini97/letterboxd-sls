@@ -1,0 +1,15 @@
+{
+  "version": "2018-05-29",
+  "operation": "GetItem",
+  "query" : {
+        "expression" : "#PK = :PK and #SK = :SK)",
+        "expressionNames" : {
+            "#PK": "PK",
+            "#SK": "SK"
+        },
+        "expressionValues" : {
+            ":PK": $util.dynamodb.toDynamoDBJson($context.source.SK),
+            ":SK": $util.dynamodb.toDynamoDBJson($context.source.SK)
+        }
+  }
+}

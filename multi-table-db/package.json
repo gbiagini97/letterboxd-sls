@@ -1,0 +1,24 @@
+{
+  "name": "letterboxd-sls-multi-table-db",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:gbiagini97/letterboxd-sls.git",
+  "author": "Gabriele Biagini <gbiagini97@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "export-env": "node _scripts/export-env.js",
+    "deploy": "sls deploy",
+    "remove": "sls remove",
+    "load-data": "node _scripts/loader.js"
+  },
+  "dependencies": {
+    "aws": "^0.0.3-2",
+    "aws-sdk": "^2.848.0",
+    "dotenv": "^16.0.1",
+    "serverless": "^3.19.0"
+  },
+  "devDependencies": {
+    "@serverless/compose": "^1.2.4"
+  }
+}

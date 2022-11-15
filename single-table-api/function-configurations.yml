@@ -1,0 +1,19 @@
+- dataSource: singleTable
+  name: getUser
+  request: 'Function.getUser.request.vtl'
+  response: 'Function.getUser.response.vtl'
+
+- dataSource: singleTable
+  name: getFollowers
+  request: 'Function.getFollowers.request.vtl'
+  response: 'Function.getFollowers.response.vtl'
+
+- dataSource: singleTable
+  name: getFollowing
+  request: 'Function.getFollowing.request.vtl'
+  response: 'Function.getFollowing.response.vtl'
+
+# - dataSource: singleTable
+#   name: getMovie
+#   request: 'Function.getMovie.request.vtl'
+#   response: 'Function.getMovie.response.vtl'

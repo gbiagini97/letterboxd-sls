@@ -1,0 +1,27 @@
+Resources:
+  AppsyncRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument: 
+        Statement: 
+          - Effect: Allow
+            Principal:
+              Service:
+                - appsync.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      Policies: 
+        - PolicyName: root
+          PolicyDocument:
+            Statement:
+              - Effect: Allow
+                Action: 
+                  - logs:Create*
+                  - logs:PutLogEvents
+                Resource: "*"
+              - Effect: Allow
+                Action: 
+                  - xray:PutTraceSegments
+                  - xray:PutTelemetryRecords
+                Resource: "*"
+      RoleName: ${self:service}-${self:provider.stage}-appsync-role

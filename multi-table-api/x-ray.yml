@@ -1,0 +1,23 @@
+Resources:
+  Appsync2Group:
+    Type: AWS::XRay::Group
+    Properties: 
+      FilterExpression: service("appsync2")
+      GroupName: multi-table-group
+
+
+  Appsync2SamplingRule:
+    Type: AWS::XRay::SamplingRule
+    Properties:
+      SamplingRule:
+        RuleName: appsync2-sampling-rule
+        ResourceARN: "*"
+        Priority: 1000
+        FixedRate: 0.05
+        ReservoirSize: 50
+        ServiceName: "appsync2"
+        ServiceType: "*"
+        Host: "*"
+        HTTPMethod: "*"
+        URLPath: "*"
+        Version: 1

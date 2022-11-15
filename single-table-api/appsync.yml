@@ -1,0 +1,26 @@
+name: appsync
+schema:
+  - schema.gql
+
+authenticationType: API_KEY
+xrayEnabled: true
+
+mappingTemplatesLocation: mapping-templates
+
+mappingTemplates:
+  - ${file(mapping-templates.yml)}
+
+dataSources:
+  - type: NONE
+    name: none
+
+  - type: AMAZON_DYNAMODB
+    name: singleTable
+    config:
+      tableName: ${cf:${self:provider.environment.singleTableDBStack}.SingleTableID}
+
+functionConfigurations:
+  - ${file(function-configurations.yml)}
+
+substitutions:
+  SingleTableSubstitution: ${cf:${self:provider.environment.singleTableDBStack}.SingleTableID}

@@ -1,0 +1,16 @@
+services:
+  SingleTableDB:
+    path: single-table-db
+
+  SingleTableAPI:
+    path: single-table-api
+    params:
+      SingleTableDBStack: ${SingleTableDB.CFStack}
+
+  MultiTableDB:
+    path: multi-table-db
+
+  MultiTableAPI:
+    path: multi-table-api
+    params:
+      MultiTableDBStack: ${MultiTableDB.CFStack}

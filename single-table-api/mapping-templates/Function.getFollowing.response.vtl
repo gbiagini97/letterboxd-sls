@@ -1,0 +1,5 @@
+#set($userIDs = [])
+#foreach ($item in $ctx.result.items)
+    $util.qr($userIDs.add($item.SK))
+#end
+{"userIDs": $util.toJson($userIDs)}

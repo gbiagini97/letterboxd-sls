@@ -1,0 +1,25 @@
+{
+  "version": "2018-05-29",
+  "operation": "Query",
+  "index": "invertedKeys",
+  "query" : {
+        "expression" : "#SK = :SK and begins_with(#PK, :userType)",
+        "expressionNames" : {
+            "#SK": "SK",
+            "#PK": "PK"
+        },
+        "expressionValues" : {
+            ":SK": $util.dynamodb.toDynamoDBJson($context.source.PK),
+            ":userType": $util.dynamodb.toDynamoDBJson("USER")
+        }
+  },
+  "filter": {
+    "expression" : "#__typename = :followType",
+    "expressionNames" : {
+        "#__typename" : "__typename"
+    },
+    "expressionValues" : {
+        ":followType" : $util.dynamodb.toDynamoDBJson("FOLLOW")
+    }
+  }
+}

@@ -1,0 +1,27 @@
+- type: Query
+  field: getUser
+  kind: PIPELINE
+  functions:
+    - getUser
+
+- type: User
+  field: followers
+  kind: PIPELINE
+  functions:
+    - getFollowers
+    - getUser
+
+- type: User
+  field: following
+  kind: PIPELINE
+  functions:
+    - getFollowing
+    - getUser
+
+- type: User
+  field: reviews
+  dataSource: reviewsTable
+
+- type: Review
+  field: movie
+  dataSource: moviesTable

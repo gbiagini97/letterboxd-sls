@@ -1,0 +1,31 @@
+#if($context.prev.result.userID)
+    {
+        "version" : "2018-05-29",
+        "operation" : "GetItem",
+        "key" : {
+            "PK": $util.dynamodb.toDynamoDBJson($context.prev.result.userID),
+            "SK": $util.dynamodb.toDynamoDBJson($context.prev.result.userID)
+        }
+    }
+#elseif ($context.prev.result.userIDs && $context.prev.result.userIDs.size() > 0)
+    #set($userIDs = [])
+    #foreach($ID in ${context.prev.result.userIDs})
+        #set($map = {})
+        $util.qr($map.put("PK", $util.dynamodb.toString($ID)))
+        $util.qr($map.put("SK", $util.dynamodb.toString($ID)))
+        $util.qr($userIDs.add($map))
+    #end
+
+    {
+        "version" : "2018-05-29",
+        "operation" : "BatchGetItem",
+        "tables" : {
+            "${UsersTableSubstitution}": {
+                "keys": $util.toJson($userIDs),
+                "consistentRead": true
+            }
+        }
+    }
+#else
+    #return
+#end

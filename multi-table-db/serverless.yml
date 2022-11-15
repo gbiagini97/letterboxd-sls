@@ -1,0 +1,48 @@
+service: multi-table-db
+frameworkVersion: "3"
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: ${opt:stage, env:AWS_STAGE, 'dev'}
+  region: ${opt:region, env:AWS_REGION, 'eu-central-1'}
+  stackName: ${self:service}-${self:provider.stage}
+
+resources:
+  - ${file(usersTable.yml)}
+  - ${file(reviewsTable.yml)}
+  - ${file(moviesTable.yml)}
+  - ${file(relationshipsTable.yml)}
+  - ${file(listsTable.yml)}
+  - ${file(associationsTable.yml)}
+
+  - Outputs:
+      AwsRegion:
+        Value: ${opt:region, self:provider.region}
+      CFStack:
+        Value: ${self:provider.stackName}
+      UsersTableID:
+        Value: !Ref UsersTable
+      UsersTableArn:
+        Value: !GetAtt UsersTable.Arn
+      ReviewsTableID:
+        Value: !Ref ReviewsTable
+      ReviewsTableArn:
+        Value: !GetAtt ReviewsTable.Arn
+      MoviesTableID:
+        Value: !Ref MoviesTable
+      MoviesTableArn:
+        Value: !GetAtt MoviesTable.Arn
+      RelationshipsTableID:
+        Value: !Ref RelationshipsTable
+      RelationshipsTableArn:
+        Value: !GetAtt RelationshipsTable.Arn
+      ListsTableID:
+        Value: !Ref ListsTable
+      ListsTableArn:
+        Value: !GetAtt ListsTable.Arn
+      AssociationsTableID:
+        Value: !Ref AssociationsTable
+      AssociationsTableArn:
+        Value: !GetAtt AssociationsTable.Arn

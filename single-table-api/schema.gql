@@ -1,0 +1,79 @@
+schema {
+  query: Query
+}
+
+type Query {
+  getUser(userID: String!): User
+}
+
+type User {
+  PK: String!
+  SK: String!
+  __typename: Typename!
+  email: String!
+  name: String!
+  bio: String
+  followersCount: Int
+  followingCount: Int
+  reviewsCount: Int
+  listsCount: Int
+  likesCount: Int
+  updatedAt: AWSDateTime!
+
+  # nested
+  reviews: [Review!]
+  lists: [List!]
+  followers: [User!]
+  following: [User!]
+}
+
+type Review {
+  PK: String!
+  SK: String!
+  __typename: Typename!
+  rating: Int!
+  description: String
+  likesCount: Int!
+  updatedAt: AWSDateTime!
+
+  # nested
+  movie: Movie!
+}
+
+type Movie {
+  PK: String!
+  SK: String!
+  __typename: Typename!
+  title: String!
+  releaseDate: AWSDateTime!
+  director: String!
+  listsCount: Int!
+  reviewsCount: Int!
+  updatedAt: AWSDateTime!
+
+  # nested
+  reviews: [Review!]
+}
+
+type List {
+  PK: String!
+  SK: String!
+  __typename: Typename!
+  name: String!
+  updatedAt: AWSDateTime!
+
+  # nested
+  movies: [Movie!]
+}
+
+enum Typename {
+  USER
+  MOVIE
+  REVIEW
+  LIST
+  ASSOCIATION
+  FOLLOW
+}
+
+
+

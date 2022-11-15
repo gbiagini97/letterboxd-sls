@@ -1,0 +1,174 @@
+{
+  "movies": [
+    {
+      "PK": "MOVIE#The-Raccoon-in-Becedoab-99",
+      "SK": "MOVIE#The-Raccoon-in-Becedoab-99",
+      "__typename": "MOVIE",
+      "title": "The Raccoon in Becedoab 99",
+      "releaseDate": "2018-07-18T06:20:32.443Z",
+      "updatedAt": "2022-09-07T13:15:50.390Z",
+      "director": "Vincent Stephens",
+      "listsCount": 1,
+      "reviewsCount": 1
+    },
+    {
+      "PK": "MOVIE#The-Zebu-in-Fusutef-78",
+      "SK": "MOVIE#The-Zebu-in-Fusutef-78",
+      "__typename": "MOVIE",
+      "title": "The Zebu in Fusutef 78",
+      "releaseDate": "2000-06-11T05:59:02.681Z",
+      "updatedAt": "2022-09-07T13:15:50.390Z",
+      "director": "Marc Wilkins",
+      "listsCount": 0,
+      "reviewsCount": 1
+    },
+    {
+      "PK": "MOVIE#The-Honey-in-Okkijo-11",
+      "SK": "MOVIE#The-Honey-in-Okkijo-11",
+      "__typename": "MOVIE",
+      "title": "The Honey in Okkijo 11",
+      "releaseDate": "2007-03-27T01:55:51.845Z",
+      "updatedAt": "2022-09-07T13:15:50.390Z",
+      "director": "Owen Pittman",
+      "listsCount": 0,
+      "reviewsCount": 0
+    },
+    {
+      "PK": "MOVIE#The-Guinea-Fowl-in-Laosawis-4",
+      "SK": "MOVIE#The-Guinea-Fowl-in-Laosawis-4",
+      "__typename": "MOVIE",
+      "title": "The Guinea Fowl in Laosawis 4",
+      "releaseDate": "2016-04-10T09:29:53.527Z",
+      "updatedAt": "2022-09-07T13:15:50.390Z",
+      "director": "Lura Luna",
+      "listsCount": 0,
+      "reviewsCount": 1
+    }
+  ],
+  "users": [
+    {
+      "PK": "USER#6407lemapu@opu.om",
+      "SK": "USER#6407lemapu@opu.om",
+      "__typename": "USER",
+      "email": "6407lemapu@opu.om",
+      "name": "Alvin Rogers",
+      "bio": "Gauzep ajwasri rebwo rake na ilijeghe san tektepor beunuori sipuv ziztic wacezlun uki po pe gopu pa.",
+      "followersCount": 3,
+      "followingCount": 4,
+      "reviewsCount": 0,
+      "listsCount": 0,
+      "likesCount": 1,
+      "updatedAt": "2022-09-07T13:15:50.394Z"
+    },
+    {
+      "PK": "USER#154vofuwog@tuakuvav.tj",
+      "SK": "USER#154vofuwog@tuakuvav.tj",
+      "__typename": "USER",
+      "email": "154vofuwog@tuakuvav.tj",
+      "name": "Steve Myers",
+      "bio": "Ev laukunej ru zu cernunbe gi em fecjinu bi nebgu vowgugba fil.",
+      "followersCount": 1,
+      "followingCount": 2,
+      "reviewsCount": 2,
+      "listsCount": 1,
+      "likesCount": 1,
+      "updatedAt": "2022-09-07T13:15:50.394Z"
+    },
+    {
+      "PK": "USER#8660fuk@wucavza.mp",
+      "SK": "USER#8660fuk@wucavza.mp",
+      "__typename": "USER",
+      "email": "8660fuk@wucavza.mp",
+      "name": "Jean Barber",
+      "bio": "Burcup towehuse se omnowe ozafa juplad jotcal ehmicvo hi nek iloduhu terutef fov segec.",
+      "followersCount": 1,
+      "followingCount": 0,
+      "reviewsCount": 2,
+      "listsCount": 0,
+      "likesCount": 0,
+      "updatedAt": "2022-09-07T13:15:50.394Z"
+    }
+  ],
+  "reviews": [
+    {
+      "PK": "USER#154vofuwog@tuakuvav.tj",
+      "SK": "MOVIE#The-Raccoon-in-Becedoab-99",
+      "__typename": "REVIEW",
+      "rating": 3,
+      "description": "Hurojeki egurata kak josuwo tohdaka munupet vap caforbag pal fovosi jaghij fofo.",
+      "likesCount": 2,
+      "updatedAt": "2022-09-07T13:15:50.395Z"
+    },
+    {
+      "PK": "USER#8660fuk@wucavza.mp",
+      "SK": "MOVIE#The-Raccoon-in-Becedoab-99",
+      "__typename": "REVIEW",
+      "rating": 9,
+      "description": "Risre vi nuebi cof amo lekod numcaglaz luv baspakaw useizu dis piz votunjog.",
+      "likesCount": 0,
+      "updatedAt": "2022-09-07T13:15:50.395Z"
+    }
+  ],
+  "lists": [
+    {
+      "PK": "USER#8660fuk@wucavza.mp",
+      "SK": "LIST#Enueboz-pakampuj-upe-nitgo-ahle-zep-kuciduz-jaiceto-iw-hovbeh-8768",
+      "__typename": "LIST",
+      "name": "Enueboz pakampuj upe nitgo ahle zep kuciduz jaiceto iw hovbeh 8768",
+      "updatedAt": "2022-09-07T13:15:50.395Z"
+    },
+    {
+      "PK": "USER#8660fuk@wucavza.mp",
+      "SK": "LIST#Re-kitogpot-zi-emhufe-boca-ucu-et-bi-cah-ak-8431",
+      "__typename": "LIST",
+      "name": "Re kitogpot zi emhufe boca ucu et bi cah ak 8431",
+      "updatedAt": "2022-09-07T13:15:50.395Z"
+    }
+  ],
+  "associations": [
+    {
+      "PK": "LIST#Enueboz-pakampuj-upe-nitgo-ahle-zep-kuciduz-jaiceto-iw-hovbeh-8768",
+      "SK": "MOVIE#The-Guinea-Fowl-in-Laosawis-4",
+      "__typename": "ASSOCIATION",
+      "updatedAt": "2022-09-07T13:15:50.396Z"
+    },
+    {
+      "PK": "LIST#Re-kitogpot-zi-emhufe-boca-ucu-et-bi-cah-ak-8431",
+      "SK": "MOVIE#The-Honey-in-Okkijo-11",
+      "__typename": "ASSOCIATION",
+      "updatedAt": "2022-09-07T13:15:50.396Z"
+    },
+    {
+      "PK": "LIST#Re-kitogpot-zi-emhufe-boca-ucu-et-bi-cah-ak-8431",
+      "SK": "MOVIE#The-Guinea-Fowl-in-Laosawis-4",
+      "__typename": "ASSOCIATION",
+      "updatedAt": "2022-09-07T13:15:50.396Z"
+    }
+  ],
+  "relationships": [
+    {
+      "PK": "USER#6407lemapu@opu.om",
+      "SK": "USER#154vofuwog@tuakuvav.tj",
+      "__typename": "FOLLOW",
+      "updatedAt": "2022-09-07T13:15:50.396Z"
+    },
+    {
+      "PK": "USER#6407lemapu@opu.om",
+      "SK": "USER#8660fuk@wucavza.mp",
+      "__typename": "FOLLOW",
+      "updatedAt": "2022-09-07T13:15:50.396Z"
+    },
+    {
+      "PK": "USER#154vofuwog@tuakuvav.tj",
+      "SK": "USER#6407lemapu@opu.om",
+      "__typename": "FOLLOW",
+      "updatedAt": "2022-09-07T13:15:50.396Z"
+    },
+    {
+      "PK": "USER#154vofuwog@tuakuvav.tj",
+      "SK": "USER#8660fuk@wucavza.mp",
+      "__typename": "FOLLOW",
+      "updatedAt": "2022-09-07T13:15:50.396Z"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+- dataSource: usersTable
+  name: getUser
+  request: 'Function.getUser.request.vtl'
+  response: 'Function.getUser.response.vtl'
+
+- dataSource: relationshipsTable
+  name: getFollowers
+  request: 'Function.getFollowers.request.vtl'
+  response: 'Function.getFollowers.response.vtl'
+
+- dataSource: relationshipsTable
+  name: getFollowing
+  request: 'Function.getFollowing.request.vtl'
+  response: 'Function.getFollowing.response.vtl'

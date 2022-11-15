@@ -1,0 +1,51 @@
+name: appsync2
+schema:
+  - schema.gql
+
+authenticationType: API_KEY
+xrayEnabled: true
+
+mappingTemplatesLocation: mapping-templates
+
+mappingTemplates:
+  - ${file(mapping-templates.yml)}
+
+dataSources:
+  - type: NONE
+    name: none
+
+  - type: AMAZON_DYNAMODB
+    name: usersTable
+    config:
+      tableName: ${cf:${self:provider.environment.multiTableDBStack}.UsersTableID}
+
+  - type: AMAZON_DYNAMODB
+    name: reviewsTable
+    config:
+      tableName: ${cf:${self:provider.environment.multiTableDBStack}.ReviewsTableID}
+
+  - type: AMAZON_DYNAMODB
+    name: moviesTable
+    config:
+      tableName: ${cf:${self:provider.environment.multiTableDBStack}.MoviesTableID}
+
+  - type: AMAZON_DYNAMODB
+    name: listsTable
+    config:
+      tableName: ${cf:${self:provider.environment.multiTableDBStack}.ListsTableID}
+
+  - type: AMAZON_DYNAMODB
+    name: relationshipsTable
+    config:
+      tableName: ${cf:${self:provider.environment.multiTableDBStack}.RelationshipsTableID}
+
+  - type: AMAZON_DYNAMODB
+    name: associationsTable
+    config:
+      tableName: ${cf:${self:provider.environment.multiTableDBStack}.AssociationsTableID}
+
+functionConfigurations:
+  - ${file(function-configurations.yml)}
+
+substitutions:
+  UsersTableSubstitution: ${cf:${self:provider.environment.multiTableDBStack}.UsersTableID}

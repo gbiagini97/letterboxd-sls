@@ -1,0 +1,29 @@
+{
+  "name": "letterboxd-sls",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:gbiagini97/letterboxd-sls.git",
+  "author": "Gabriele Biagini <gbiagini97@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@aws-sdk/protocol-http": "^3.160.0",
+    "chance": "^1.1.8",
+    "dotenv": "^16.0.1",
+    "serverless": "^3.19.0",
+    "serverless-appsync-plugin": "^1.14.0"
+  },
+  "devDependencies": {
+    "@aws-sdk/client-dynamodb": "^3.121.0",
+    "@aws-sdk/lib-dynamodb": "^3.121.0",
+    "@aws-sdk/util-dynamodb": "^3.121.0",
+    "@serverless/compose": "^1.2.4",
+    "serverless-iam-roles-per-function": "^3.2.0"
+  },
+  "workspaces": [
+    "single-table-db",
+    "single-table-api",
+    "multi-table-db",
+    "multi-table-api"
+  ]
+}

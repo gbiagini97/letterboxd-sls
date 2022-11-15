@@ -1,0 +1,8 @@
+
+#if($context.prev.result.userID)
+  $util.toJson($ctx.result)
+#elseif ($context.prev.result.userIDs)
+  $util.toJson($ctx.result.data.${UsersTableSubstitution})
+#else 
+  $util.toJson(null)
+#end

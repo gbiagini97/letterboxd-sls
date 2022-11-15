@@ -1,0 +1,30 @@
+service: single-table-api
+frameworkVersion: "3"
+useDotenv: true
+
+plugins:
+  - serverless-appsync-plugin
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: ${opt:stage, env:AWS_STAGE, 'dev'}
+  region: ${opt:region, env:AWS_REGION, 'eu-central-1'}
+  stackName: ${self:service}-${self:provider.stage}
+
+  environment:
+    singleTableDBStack: ${param:SingleTableDBStack}
+
+custom:
+  appSync:
+    - ${file(appsync.yml)}
+
+resources:
+  - ${file(appsyncRole.yml)}
+  - ${file(x-ray.yml)}
+
+
+  - Outputs:
+      AwsRegion:
+        Value: ${opt:region, self:provider.region}
+      

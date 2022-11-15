@@ -1,0 +1,15 @@
+{
+  "version": "2018-05-29",
+  "operation": "Query",
+  "query" : {
+        "expression" : "#PK = :PK and begins_with(#SK, :movieType)",
+        "expressionNames" : {
+            "#PK": "PK",
+            "#SK": "SK"
+        },
+        "expressionValues" : {
+            ":PK": $util.dynamodb.toDynamoDBJson($context.source.PK),
+            ":movieType": $util.dynamodb.toDynamoDBJson("MOVIE")
+        }
+  },
+}
