@@ -6,6 +6,12 @@
   "author": "Gabriele Biagini <gbiagini97@gmail.com>",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "deploy": "sls deploy",
+    "remove": "sls remove",
+    "load-data": "node loader.js",
+    "test": "node test.js"
+  },
   "dependencies": {
     "@aws-sdk/protocol-http": "^3.160.0",
     "chance": "^1.1.8",
