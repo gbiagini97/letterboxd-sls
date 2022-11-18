@@ -4,7 +4,54 @@ const fs = require("fs");
 const dataFile = fs.readFileSync("./loaded-data.json");
 const loadedData = JSON.parse(dataFile);
 const stateFile = fs.readFileSync(".serverless/state.dev.json");
-const stateData = JSON.parse(stateFile);
+const state = JSON.parse(stateFile);
+const queries = {
+  query1: `
+  query MyQuery($userID: String!) {
+    getUser(userID: $userID) {
+      PK
+      following {
+        PK
+        SK
+      }
+    }
+  }`,
+
+  query2: `
+  query MyQuery($userID: String!) {
+    getUser(userID: $userID) {
+      PK
+      following {
+        PK
+        SK
+        reviews {
+          PK
+          SK
+        }
+      }
+    }
+  }`,
+
+  query3: `
+  query MyQuery($userID: String!) {
+    getUser(userID: $userID) {
+      PK
+      following {
+        PK
+        SK
+        reviews {
+          PK
+          SK
+          movie {
+            PK
+            SK
+          }
+        }
+      }
+    }
+  }`,
+};
+const choice = process.argv[2] || 'query1'
 
 const throwOnErrors = ({ query, variables, errors }) => {
   if (errors) {
@@ -69,82 +116,38 @@ async function gqlRequest(url, key, query, operationName, variables) {
 
 async function loadTest(query, userID) {
   const appsync = {
-    url: stateData.components["SingleTableAPI"].outputs.AppsyncGraphQlApiUrl,
-    key:
-      stateData.components["SingleTableAPI"].outputs
-        .AppsyncGraphQlApiKeyDefault,
+    url: state.components.SingleTableAPI.outputs.AppsyncGraphQlApiUrl,
+    key: state.components.SingleTableAPI.outputs.AppsyncGraphQlApiKeyDefault,
   };
 
   const appsync2 = {
-    url: stateData.components["MultiTableAPI"].outputs.Appsync2GraphQlApiUrl,
-    key:
-      stateData.components["MultiTableAPI"].outputs.Appsync2GraphQlApiKeyDefault,
+    url: state.components.MultiTableAPI.outputs.Appsync2GraphQlApiUrl,
+    key: state.components.MultiTableAPI.outputs.Appsync2GraphQlApiKeyDefault,
   };
 
-  for(const appsyncConfig of [appsync, appsync2]) {
-    const numberOfRequest = 5
-    for(let i = 0; i<numberOfRequest; i++) {
-      const res = await gqlRequest(appsyncConfig.url, appsyncConfig.key, query, "MyQuery", {userID: userID})
-      console.log(res)
+  for (const appsyncConfig of [appsync, appsync2]) {
+    const numberOfRequest = 5;
+    for (let i = 0; i < numberOfRequest; i++) {
+      const res = await gqlRequest(
+        appsyncConfig.url,
+        appsyncConfig.key,
+        query,
+        "MyQuery",
+        { userID: userID }
+      );
+      //console.log(res);
     }
   }
-
 }
 
 async function main() {
+  console.log('Executing ' + choice)
 
-  const query1 = `
-  query MyQuery($userID: String!) {
-    getUser(userID: $userID) {
-      PK
-      following {
-        PK
-        SK
-      }
-    }
-  }`
-  
-  const query2 = `
-  query MyQuery($userID: String!) {
-    getUser(userID: $userID) {
-      PK
-      following {
-        PK
-        SK
-        reviews {
-          PK
-          SK
-        }
-      }
-    }
-  }  
-  `;
-
-  const query3 = `
-  query MyQuery($userID: String!) {
-    getUser(userID: $userID) {
-      PK
-      following {
-        PK
-        SK
-        reviews {
-          PK
-          SK
-          movie {
-            PK
-            SK
-          }
-        }
-      }
-    }
-  }
-  `
-
-
-  //await loadTest(query1, loadedData.users[chance.integer({ min: 0, max: loadedData.users.length - 1 })].PK)
-  //await loadTest(query2, loadedData.users[chance.integer({ min: 0, max: loadedData.users.length - 1 })].PK)
-  await loadTest(query3, loadedData.users[chance.integer({ min: 0, max: loadedData.users.length - 1 })].PK)
-  
+  const randomUser =
+    loadedData.users[
+      chance.integer({ min: 0, max: loadedData.users.length - 1 })
+    ].PK;
+  await loadTest(queries[choice], randomUser);
 }
 
 main();
