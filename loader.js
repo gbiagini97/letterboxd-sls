@@ -227,7 +227,7 @@ function prepInput(moviesCount = 60, usersCount = 100, listsCount = 50) {
   ]);
 
   fs.writeFileSync(
-    "./loaded-data2.json",
+    "./loaded-data.json",
     JSON.stringify({
       movies: movies,
       users: users,

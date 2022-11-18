@@ -7,10 +7,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "export-env": "node _scripts/export-env.js",
     "deploy": "sls deploy",
-    "remove": "sls remove",
-    "load-data": "node _scripts/loader.js"
+    "remove": "sls remove"
   },
   "dependencies": {
     "aws": "^0.0.3-2",

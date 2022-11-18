@@ -19,12 +19,6 @@ Resources:
           Projection: 
             ProjectionType: ALL
           
-      # LocalSecondaryIndexes: 
-      #   - IndexName: byTypename
-      #     KeySchema:
-      #       - AttributeName: PK
-      #         KeyType: HASH
-
       AttributeDefinitions:
         - AttributeName: PK
           AttributeType: S

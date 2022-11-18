@@ -12,8 +12,3 @@
   name: getFollowing
   request: 'Function.getFollowing.request.vtl'
   response: 'Function.getFollowing.response.vtl'
-
-# - dataSource: singleTable
-#   name: getMovie
-#   request: 'Function.getMovie.request.vtl'
-#   response: 'Function.getMovie.response.vtl'

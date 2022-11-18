@@ -28,5 +28,3 @@
 - type: Review
   field: movie
   dataSource: singleTable
-#  functions:
-#    - getMovie
