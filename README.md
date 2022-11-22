@@ -1,5 +1,5 @@
 
-# Yet another article about Appsync and DynamoDB (but with metrics!)
+# Domain and data modeling with Appsync and DynamoDB
 
 With REST we had an architectural style with a set of constraints that lets you interfact with Resources.
 The advent of GraphQL emphasized the fuzziness of those constraints by providing a full blown specification that defines the conceptual model as a graph.
@@ -22,7 +22,7 @@ Evans is an Extreme Programming supporter, but at this point it's pretty obvious
 
 
 ## The services we're using
-In this article we're going to use Appsync, a fully managed GraphQL service, and DynamoDB (does it really need an introduction?), THE NoSQL serverless database.
+In this article, we're going to use AppSync, a fully managed GraphQL service, and DynamoDB the most famous NoSQL serverless database.
 
 When performing an operation, in Appsync it's possible to make use of different resolvers for fetching nested fields for a given return type.
 These resolvers may get the data from the same datasource of the parent type or from another one (or a combination of both, depending on how you modeled your domain).
@@ -32,7 +32,7 @@ Now we need to make a difficult choice:
   2. Use DynamoDB pretty much like a SQL database and create a new table for each data model.
 
 
-The purpose of this article is to compare the effectiveness of each approach.
+**The purpose of this article is to compare the effectiveness of each approach by executing three queries with different nesting levels.**
 
 
 ![Fight](docs/img/fight.png)
@@ -210,11 +210,9 @@ Results:
 ---
 
 
-## The DataLoader is effectively advertized
-Hot take: Appsync doesn't implement the DataLoader pattern.
-The "DataLoader" that is effectively advertized in the [Appsync Architecture page](https://docs.aws.amazon.com/appsync/latest/devguide/system-overview-and-architecture.html) is about the invocation of single resolvers. Resolvers are executed concurrently, as you would do in a set of promises in JS via Promise.all(). But that's the end of the "batching thing".
-
-To me that is a huge turn-off as the number of database accesses are not optimized when using normal DynamoDB VTL resolvers.
+## Data Loader pattern
+Hot take: Appsync doesn't implement the DataLoader pattern, or at least not in the way you might think of.
+On the [Appsync Architecture page](https://docs.aws.amazon.com/appsync/latest/devguide/system-overview-and-architecture.html) we get to know that resolvers are executed concurrently, as you would do in a set of promises in JS via Promise.all(). This implies that the total number of database accesses is not optimized when using normal DynamoDB VTL resolvers.
 
 Here's the detailed X-Ray report of the Query no. 3:
 ![Single Table Metrics Query 3 Detail](docs/img/query3/single-table/detail.png)
@@ -257,15 +255,16 @@ The efficiency gains can be easily surpassed by the ease of use (no complex cust
 I don't want to start a philosophical debate but the serverless proposition is about saying goodbye to everything that doesn't bring direct value to the project.
 
 Let's imagine the following scenario:
-> You've just launched a big OLTP service that relies solely on Serverless products from AWS.
-> The first big development phase has just finished and you're trying to prepare for the next sprints when, a colleague asks for: "Can you please provide me the number of _apple orders_ executed  _within the dates X and Y_ from customers that live in _Taiwan_ that _don't have pears in their fridge_?"
-> DynamoDB is not meant to be used for analytical applications (it doesn't even have the simplest aggregation functions like SUM or MAX), and you haven't prepared any infrastructure that can handle such complex query.
+You've just launched a big OLTP service that relies solely on Serverless products from AWS.
+The first big development phase has just finished, and you're trying to prepare for the next sprints when a colleague asks: "Can you please provide me the number of apple orders executed within the dates X and Y from customers that live in Taiwan that don't have pears in their fridge?"
 
-If the application data is spread across multiple tables and for each table the data model is consistent, we can easily export that data to build aggregations and run queries via Athena, Redshift or Glue (Crawlers are cool!).
+DynamoDB is not meant for analytical applications (it doesn't even have the simplest aggregation functions like SUM or MAX). And you haven't prepared any infrastructure that can handle such a complex query.
 
-If we favored Single Table Design, we're most likely going to write a custom script/application that will make a lot of requests and logically join the data. Then we'd probably start scratching our head trying to figure out how to include that access pattern (maybe using metadata objects).
+If the application data is spread across multiple tables and for each table, the data model is consistent, we can easily export that data to build aggregations and run queries via Athena, Redshift, or Glue (Crawlers are cool!).
 
-What happens if the subsequent day our curious colleague asks for a completely different type of information? I believe I made my point.
+If we favored a Single Table Design, we're most likely going to write a custom script/application that will make a lot of requests and logically join the data. Then we'd probably start scratching our heads trying to figure out how to include that access pattern (maybe using metadata objects).
+
+What happens if, the subsequent day, our curious colleague asks for a completely different type of information? I believe I’ve made my point.
 
 
 ## Final thoughts
